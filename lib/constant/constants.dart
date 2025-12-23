@@ -10,3 +10,15 @@ var myInputDecoration = InputDecoration(
     borderRadius: BorderRadius.circular(kMarginLarge),
   ),
 );
+
+var cardDecoration = BoxDecoration(
+  color: Colors.white,
+  borderRadius: BorderRadius.circular(20),
+  boxShadow: [
+    BoxShadow(
+      color: Colors.black12,
+      offset: Offset(0, 2),
+      blurRadius: 6.0,
+    ),
+  ],
+);

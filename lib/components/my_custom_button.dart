@@ -13,7 +13,7 @@ class MyCustomButton extends StatelessWidget {
       required this.backgroundColor,
       required this.textColor,
       required this.onClick,
-      this.width = 100});
+      this.width = 120});
 
   @override
   Widget build(BuildContext context) {
