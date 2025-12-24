@@ -2,6 +2,7 @@ import 'package:demo_batch2/components/my_custom_button.dart';
 import 'package:demo_batch2/constant/constants.dart';
 import 'package:demo_batch2/screens/detail_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -39,14 +40,30 @@ class _DashboardScreenState extends State<DashboardScreen> {
               margin: EdgeInsets.all(20),
               padding: EdgeInsets.all(20),
               decoration: cardDecoration,
+              child: Image.asset("assets/images/christmas.jpg"),
+            ),
+            Container(
+              margin: EdgeInsets.all(20),
+              padding: EdgeInsets.all(20),
+              decoration: cardDecoration,
+              child: Image.network(
+                "https://cdn.pixabay.com/photo/2024/11/10/10/32/christmas-9187543_1280.jpg",
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(20),
+              padding: EdgeInsets.all(20),
+              decoration: cardDecoration,
               child: Column(
                 children: [
                   Text(
                     "Counter $_counter",
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.orange),
+                    style:
+                        titleFont.copyWith(color: Colors.green, fontSize: 22),
+                    // style: TextStyle(
+                    //     fontSize: 20,
+                    //     fontWeight: FontWeight.bold,
+                    //     color: Colors.orange),
                   ),
                   SizedBox(height: kMarginLarge),
                   Row(
@@ -123,6 +140,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                   ],
                 )),
+            MyCustomButton(
+                title: "Show Toast",
+                backgroundColor: Colors.blue,
+                textColor: Colors.white,
+                onClick: () {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    backgroundColor: Colors.red,
+                    content: Text(
+                      "This is a toast message",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ));
+                })
           ],
         )));
   }
