@@ -1,5 +1,6 @@
 import 'package:demo_batch2/homepage.dart';
 import 'package:demo_batch2/screens/dashboard_screen.dart';
+import 'package:demo_batch2/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: DashboardScreen(),
+      home: LoginScreen(),
     );
   }
 }

@@ -1,8 +1,13 @@
+import 'package:demo_batch2/api/APICall.dart';
 import 'package:demo_batch2/components/my_custom_button.dart';
 import 'package:demo_batch2/constant/constants.dart';
+import 'package:demo_batch2/models/GetAllServicesData.dart';
+import 'package:demo_batch2/screens/all_services_screen.dart';
 import 'package:demo_batch2/screens/detail_screen.dart';
+import 'package:demo_batch2/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -23,19 +28,42 @@ class _DashboardScreenState extends State<DashboardScreen> {
     _counter = 0;
   }
 
+  void logout() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.clear();
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => LoginScreen()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.grey,
         appBar: AppBar(
-          backgroundColor: Colors.blue,
-          foregroundColor: Colors.white,
-          title: Text("Dashboard"),
-        ),
+            backgroundColor: Colors.blue,
+            foregroundColor: Colors.white,
+            title: Text("Dashboard"),
+            actions: [
+              IconButton(
+                icon: Icon(Icons.logout),
+                onPressed: logout,
+              )
+            ]),
         body: SingleChildScrollView(
             child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            MyCustomButton(
+                title: "All Services",
+                backgroundColor: Colors.green,
+                textColor: Colors.white,
+                width: 150,
+                onClick: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AllServicesScreen()));
+                }),
             Container(
               margin: EdgeInsets.all(20),
               padding: EdgeInsets.all(20),
@@ -144,7 +172,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 title: "Show Toast",
                 backgroundColor: Colors.blue,
                 textColor: Colors.white,
-                onClick: () {
+                onClick: () async {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     backgroundColor: Colors.red,
                     content: Text(
@@ -152,7 +180,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       style: TextStyle(fontSize: 20),
                     ),
                   ));
-                })
+                  APICall apiCall = APICall();
+                  GetAllServicesData data = await apiCall.getAllServices();
+                  print(data.services![0].nameEn);
+                }),
           ],
         )));
   }
